@@ -12,4 +12,5 @@ Otro problema importante que tuve fue  especificar la lista por comprensión en 
 **Pregunta 1**
 La diferencia entre ellos es que Num es una clase de tipos e Int es un tipo específico. De hecho, Int es una instancia de Num, ya que las operaciones que define Num son aplicables al tipo Int. 
 Captura:
+<img width="553" height="543" alt="Práctica3" src="https://github.com/user-attachments/assets/0298f8bf-dfdb-4946-a57b-281b31bed417" />
 
