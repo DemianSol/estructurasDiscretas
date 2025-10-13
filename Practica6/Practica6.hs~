@@ -1,0 +1,57 @@
+module Practica6 where
+
+data Arbol a = Vacio | AB a (Arbol a) (Arbol a) deriving (Eq, Ord, Show)
+
+
+nVacios :: Arbol a -> Int
+nVacios Vacio = 0
+nVacios (AB n izq der)  = auxVacios izq + auxVacios der
+
+auxVacios :: Arbol a -> Int
+auxVacios Vacio = 1
+auxVacios (AB n izq der) = auxVacios izq + auxVacios der
+
+refleja :: Arbol a -> Arbol a
+refleja Vacio = Vacio
+refleja (AB n Vacio Vacio) = (AB n Vacio Vacio)
+refleja (AB n izq der) = (AB n (refleja der) (refleja izq) )
+
+minimo :: (Ord a) => Arbol a -> a
+minimo Vacio = error "El arbol vacío no tiene elemento mínimo"
+minimo (AB n Vacio Vacio) = n
+minimo (AB n izq der) = compara n (compara (minimo izq) (minimo der) )
+
+compara :: (Ord a) => a -> a -> a
+compara a1 a2 = if a1 <= a2 then a1 else a2 
+
+
+recorrido :: Arbol a -> [a]
+recorrido Vacio = []
+recorrido (AB n Vacio Vacio) = [n]
+recorrido (AB n izq der) = concatena [n] (concatena (recorrido izq) (recorrido der))
+
+concatena :: [a] -> [a] -> [a]
+concatena [] ys = ys
+concatena (x:xs) ys = x:(concatena xs ys)
+
+esBalanceado :: Arbol a -> Bool
+esBalanceado Vacio = True
+esBalanceado (AB n izq der) = if abs (altura izq - altura der) > 1 then False else esBalanceado izq && esBalanceado der
+
+altura :: Arbol a -> Int
+altura Vacio = 0
+altura (AB n Vacio Vacio) = 1
+altura (AB n izq der) = 1 + max (altura izq) (altura der) 
+                                                                                   
+listaArbol :: (Ord a) => [a] -> Arbol a
+listaArbol [] = Vacio 
+listaArbol (x:xs) = (AB x (listaArbol (listaMenores x xs)) (listaArbol (listaMayores x xs)) )
+
+
+listaMenores :: (Ord a) => a -> [a] -> [a]
+listaMenores n [] = [] 
+listaMenores n (x:xs) = if x<= n then x:(listaMenores n xs) else listaMenores n xs
+
+listaMayores :: (Ord a) => a -> [a] -> [a]
+listaMayores n [] = [] 
+listaMayores n (x:xs) = if x>n then x:(listaMayores n xs) else listaMayores n xs

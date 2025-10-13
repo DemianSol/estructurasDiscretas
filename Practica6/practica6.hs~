@@ -1,0 +1,36 @@
+data Arbol a = Vacio | AB a (Arbol a) (Arbol a) deriving (Eq, Ord, Show)
+
+
+nVacios :: Arbol a -> Int
+nVacios Vacio = 0
+nVacios (AB n izq der)  = auxVacios izq + auxVacios der
+
+auxVacios :: Arbol a -> Int
+auxVacios Vacio = 1
+auxVacios (AB n izq der) = auxVacios izq + auxVacios der
+
+refleja :: Arbol a -> Arbol a
+refleja Vacio = Vacio
+refleja (AB n Vacio Vacio) = (AB n Vacio Vacio)
+refleja (AB n izq der) = (AB n (refleja der) (refleja izq) )
+
+min :: (Ord a) => Arbol a -> a
+min Vacio = error "El arbol vacío no tiene elemento mínimo"
+min (AB n Vacio Vacio) = n
+min (AB n izq der) = compara n (compara (min izq) (min der))
+
+compara :: (Ord a) => a -> a -> a
+compara a1 a2 = if a1 <= a2 then a1 else a2 
+
+
+recorrido :: Arbol a -> [a]
+recorrido Vacio = []
+recorrido (AB n Vacio Vacio) = [n]
+recorrido (AB n izq der) = concatena [n] (concatena (recorrido izq) (recorrido der))
+
+concatena :: [a] -> [a] -> [a]
+concatena [] ys = ys
+concatena x:xs ys = x:(concatena xs ys)
+
+esBalanceado
+                                                                                      
