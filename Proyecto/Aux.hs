@@ -1,5 +1,7 @@
 module Aux where
 
+data HuffmanTree a = Vacio | Hoja Char | Nodo (HuffmanTree a) (HuffmanTree a) deriving (Eq, Ord, Show)  
+
 -- Función que genera una lista de la frecuencias de aparición de todas las letras de la cadena de texto. Una a una, asocia en una tupla a cada letra con su respectiva frecuencia de aparición y las reúne en una única lista. 
 auxListaFrecuencias :: [Char] -> [Char] -> [(Char, Int)]
 auxListaFrecuencias [] [] = [] 
@@ -46,4 +48,8 @@ auxOrdenar (ch, num) [] = [(ch, num)]
 auxOrdenar (ch, num) ((ch2, num2):ys) = if num >= num2
                                       then (ch, num):((ch2, num2):ys)
                                       else (ch2, num2):(auxOrdenar (ch, num) ys)
-
+                                      
+-- Función auxiliar que crea un árbol con todos los subárboles izquierdos como nodos sin elementos y los subárboles derechos hojas cuyos elementos son los de la lista que se recibe. 
+auxcreaArbol :: [(Char, Int)] -> HuffmanTree Char
+auxcreaArbol [] = (Nodo Vacio Vacio) 
+auxcreaArbol ((ch, num):xs)= (Nodo (auxcreaArbol xs) (Hoja ch))

@@ -5,6 +5,12 @@ listaFrecuencias :: [Char] -> [(Char, Int)]
 listaFrecuencias [] = [] --error "no se recibió lista alguna"
 listaFrecuencias xs = ordenar (auxListaFrecuencias (filtra xs) xs)
 
+-- Genera un árbol de Huffman 
+creaArbol :: [Char]-> HuffmanTree Char
+creaArbol [] = Vacio
+creaArbol (x:xs) = auxcreaArbol (listaFrecuencias (x:xs))
+
+
 
 
 
