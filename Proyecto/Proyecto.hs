@@ -10,6 +10,11 @@ creaArbol :: [Char]-> HuffmanTree Char
 creaArbol [] = Vacio
 creaArbol (x:xs) = auxcreaArbol (listaFrecuencias (x:xs))
 
+-- Genera la codificación de Huffman de la cadena de texto que recibe
+codificacion :: [Char] -> [Char]
+codificacion [] = []
+codificacion (x:xs) = auxCodificacion (creaArbol (x:xs)) (x:xs)
+
 
 
 

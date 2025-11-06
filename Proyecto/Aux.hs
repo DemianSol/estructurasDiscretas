@@ -53,3 +53,26 @@ auxOrdenar (ch, num) ((ch2, num2):ys) = if num >= num2
 auxcreaArbol :: [(Char, Int)] -> HuffmanTree Char
 auxcreaArbol [] = (Nodo Vacio Vacio) 
 auxcreaArbol ((ch, num):xs)= (Nodo (auxcreaArbol xs) (Hoja ch))
+
+-- Une la secuencia de códigos binarios que corresponden a cada carácter de la cadena de texto que recibe dado el árbol de Huffman que corresponde a la cadena. 
+auxCodificacion :: HuffmanTree Char -> [Char]-> [Char]
+auxCodificacion Vacio xs = []
+auxCodificacion (Nodo izq der) [] = [] 
+auxCodificacion (Nodo izq der) (x:xs)= concatena (generaCodificacion (Nodo izq der) x) (auxCodificacion (Nodo izq der) xs)
+
+-- Crea el código binario del carácter que recibe dado el árbol de Huffman de la cadena de texto .
+generaCodificacion :: HuffmanTree Char -> Char -> [Char]
+generaCodificacion (Nodo izq der) x = if verifica der x
+                                      then ['1']
+                                      else '0':(generaCodificacion izq x)
+-- Recibe dos listas y pega la segunda lista al final de la primera.
+concatena :: [a] -> [a] -> [a]
+concatena [] ys = ys
+concatena (x:xs) ys = x:(concatena xs ys)
+
+-- Compara el elemento de la hoja que recibe con un caracter dado. Si son iguales devuelve True; Falso en otro caso. 
+verifica :: HuffmanTree Char -> Char -> Bool
+verifica Vacio n = False
+verifica (Hoja x) n = if n==x
+                      then True
+                      else False
