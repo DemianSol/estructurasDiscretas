@@ -76,3 +76,13 @@ verifica Vacio n = False
 verifica (Hoja x) n = if n==x
                       then True
                       else False
+
+
+auxDecodificacion :: HuffmanTree Char -> String -> [Char]
+auxDecodificacion Vacio _ = []
+auxDecodificacion arbol xs = traductor arbol arbol xs
+
+traductor :: HuffmanTree Char -> HuffmanTree Char -> String -> [Char]
+traductor _ _ [] = []
+traductor arbol (Nodo izq der) ('0':xs) = traductor arbol izq xs
+traductor arbol (Nodo izq (Hoja e)) ('1':xs) = e:(traductor arbol arbol xs)

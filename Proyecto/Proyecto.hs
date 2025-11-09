@@ -1,6 +1,6 @@
 import Aux
 
--- Genera una lista de tuplas de todas las letras que aparecen en la cadena de texto. Las tuplas están ordenadas de mayor a menor cantidad de veces que se repiten las letras en la cadena. 
+-- Genera una lista de tuplas de todas las letras que aparecen en la cadena de texto con su respectiva frecuencia de aparación. La lsita se ordena de mayor a menor cantidad de veces que se repiten las letras en la cadena. 
 listaFrecuencias :: [Char] -> [(Char, Int)]
 listaFrecuencias [] = [] --error "no se recibió lista alguna"
 listaFrecuencias xs = ordenar (auxListaFrecuencias (filtra xs) xs)
@@ -15,11 +15,8 @@ codificacion :: [Char] -> [Char]
 codificacion [] = []
 codificacion (x:xs) = auxCodificacion (creaArbol (x:xs)) (x:xs)
 
-
-
-
-
-
-
-
-
+-- 
+decodificacion :: HuffmanTree Char-> [Char] -> [Char]
+decodificacion Vacio xs = []
+decodificacion _ [] = []
+decodificacion arbol xs = auxDecodificacion arbol xs
