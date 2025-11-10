@@ -27,11 +27,11 @@ codificacion [] = []
 codificacion (x:xs) = auxCodificacion (creaArbol (x:xs)) (x:xs)
 
 
-{- decodificacion: Recibe un árbol binario de Huffman, que se genera a partir de una cadena de texto, y el codigo binario codificado de la misma cadena. A partir de ambos decodifica el código binario generando la cadena de texto original mediante auxDecodificacion. Observación: El árbol de Huffman que se pasa como argumento debe colocarse entre paréntesis.
+{- decodificacion: Recibe un árbol binario de Huffman, que se genera a partir de una cadena de texto, y el codigo binario codificado de la misma cadena. A partir de ambos decodifica el código binario generando la cadena de texto original mediante la función traductor. Observación: El árbol de Huffman que se pasa como argumento debe colocarse entre paréntesis.
 Ejemplo:
 decodificacion (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo Vacio Vacio) (Hoja '\241')) (Hoja '\237')) (Hoja 'g')) (Hoja ',')) (Hoja 'A')) (Hoja 'q')) (Hoja '\233')) (Hoja 'c')) (Hoja 'y')) (Hoja 'm')) (Hoja 'l')) (Hoja 'p')) (Hoja 't')) (Hoja 'N')) (Hoja '.')) (Hoja 'u')) (Hoja 'r')) (Hoja 'd')) (Hoja 'n')) (Hoja 's')) (Hoja 'a')) (Hoja 'o')) (Hoja 'e')) (Hoja ' ')) "000000000010011000010010000000000000001100000100010000001000100000000011000000000010000000010000010000000000000000100011000010100000001000000000000000001100000100010000001000100000000011000000000010011000000000000100000000101000000100110000000000000000001000000001010000000101000000011000010100000001100000100010000001000100000000011000000000000000000010000000000001000100000001000000000001011010000100100000000000000000000110000000000010100000100000000000000000000010011010000011000000000000001000000000000000000000011000000000001001000000100100001100000000000001001000011000010000000010100000000000000000000000100100001100000010100000000000001100000000000000100000000100000100000010010000000001" = "No soy nada. Nunca ser\233 nada. No puedo querer ser nada. Aparte eso, tengo en m\237 todos los sue\241os del mundo."
 -}
 decodificacion :: HuffmanTree Char-> [Char] -> [Char]
 decodificacion Vacio xs = []
 decodificacion _ [] = []
-decodificacion arbol xs = auxDecodificacion arbol xs
+decodificacion arbol xs = traductor arbol arbol xs

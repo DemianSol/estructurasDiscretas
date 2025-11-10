@@ -81,7 +81,7 @@ auxCreaArbol [(' ',20),('e',11),('o',11),('a',8),('s',8),('n',7),('d',7),('r',5)
 -}
 auxCreaArbol :: [(Char, Int)] -> HuffmanTree Char
 auxCreaArbol [] = (Nodo Vacio Vacio) 
-auxCreaArbol ((ch, num):xs)= (Nodo (auxcreaArbol xs) (Hoja ch))
+auxCreaArbol ((ch, num):xs)= (Nodo (auxCreaArbol xs) (Hoja ch))
 
 
 {- auxCodificacion: Une la secuencia de códigos binarios que corresponden a cada carácter de la cadena de texto que recibe dado el árbol de Huffman que corresponde a la cadena original. Para cada letra en la cada llama a generaCodificación para obtener su representación codificada dado el árbol.
@@ -121,15 +121,6 @@ verifica Vacio n = False
 verifica (Hoja x) n = if n==x
                       then True
                       else False
-
-                           
-{- auxDecodificacion: Recibe el árbol binario de Huffman que genera la cadena de texto original y el código binario codificado de la cadena original. Con ambos inicia el proceso de decodificación del texto codificado mediante el árbol. Si el árbol no es vacío, llama a la función traductor.
-Ejemplo:
-auxDecodificacion (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo Vacio Vacio) (Hoja '\241')) (Hoja '\237')) (Hoja 'g')) (Hoja ',')) (Hoja 'A')) (Hoja 'q')) (Hoja '\233')) (Hoja 'c')) (Hoja 'y')) (Hoja 'm')) (Hoja 'l')) (Hoja 'p')) (Hoja 't')) (Hoja 'N')) (Hoja '.')) (Hoja 'u')) (Hoja 'r')) (Hoja 'd')) (Hoja 'n')) (Hoja 's')) (Hoja 'a')) (Hoja 'o')) (Hoja 'e')) (Hoja ' '))  "000000000010011000010010000000000000001100000100010000001000100000000011000000000010000000010000010000000000000000100011000010100000001000000000000000001100000100010000001000100000000011000000000010011000000000000100000000101000000100110000000000000000001000000001010000000101000000011000010100000001100000100010000001000100000000011000000000000000000010000000000001000100000001000000000001011010000100100000000000000000000110000000000010100000100000000000000000000010011010000011000000000000001000000000000000000000011000000000001001000000100100001100000000000001001000011000010000000010100000000000000000000000100100001100000010100000000000001100000000000000100000000100000100000010010000000001" = "No soy nada. Nunca ser\233 nada. No puedo querer ser nada. Aparte eso, tengo en m\237 todos los sue\241os del mundo."
--}
-auxDecodificacion :: HuffmanTree Char -> String -> [Char]
-auxDecodificacion Vacio _ = []
-auxDecodificacion arbol xs = traductor arbol arbol xs
 
 
 {- traductor: Recibe el árbol de Huffman de la cadena orignal y la cadena codificada. La función traduce la secuencia de la cadena codificada en carácteres al recorrer el árbol. Si la cabeza de la lista es '0' entonces avanza recursivamente en el árbol izquierdo, si es '1' entonces toma el elemento del subárbol derecho, que es siempre una hoja, lo agrega en la lista y se llama recursivamente con la raíz del árbol. Repite el proceso hasta haber aplicado este proceso para todos los elementos de la cadena binaria que recibe.
