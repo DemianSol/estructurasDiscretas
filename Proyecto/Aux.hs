@@ -2,15 +2,21 @@ module Aux where
 
 data HuffmanTree a = Vacio | Hoja a | Nodo (HuffmanTree a) (HuffmanTree a) deriving (Eq, Ord, Show)  
 
-{- auxListaFrecuencias: Recibe una lista que tiene las letras que conforman una cadena de texto pero sin repeticiones y otra lista que es la cadena original con repeticones. Con ambas genera una lista de tuplas cuyo a representa a la letra y el Int a sus repeticiones en la cadena original. 
+{- auxListaFrecuencias: Recibe una cadena de texto y a partir de ella genera una lista de tuplas de todas las letras que aparecen en la cadena de texto con su respectiva frecuencia de aparación. Elimina las repeticiones de la lista con filtra para obtener caracteres únicos y con auxListaFrecuencias asocia a cada carácter único con su frecuencia de aparición en la cadena. La lista se ordena de mayor a menor cantidad de repeticiones de la letra en la cadena completa mediante la función ordena.
 Ejemplo:
-auxListaFrecuencias "yc\233NqApar,g\237t\241sel mundo." "No soy nada. Nunca seré nada. No puedo querer ser nada. Aparte eso, tengo en mí todos los sueños del mundo." = [('y',1),('c',1),('\233',1),('N',3),('q',1),('A',1),('p',2),('a',8),('r',5),(',',1),('g',1),('\237',1),('t',3),('\241',1),('s',8),('e',11),('l',2),(' ',20),('m',2),('u',5),('n',7),('d',7),('o',11),('.',4)]
+auxListaFrecuencias "No soy nada. Nunca seré nada. No puedo querer ser nada. Aparte eso, tengo en mí todos los sueños del mundo." = [(' ',20),('e',11),('o',11),('a',8),('s',8),('n',7),('d',7),('r',5),('u',5),('.',4),('N',3),('t',3),('p',2),('l',2),('m',2),('y',1),('c',1),('\233',1),('q',1),('A',1),(',',1),('g',1),('\237',1),('\241',1)]
 -}
-auxListaFrecuencias :: Eq a => [a] -> [a] -> [(a, Int)]
-auxListaFrecuencias [] [] = [] 
-auxListaFrecuencias [] ys = []
-auxListaFrecuencias xs [] = []
-auxListaFrecuencias (x:xs) (y:ys) = (x, (contar x (y:ys))):(auxListaFrecuencias xs (y:ys))
+auxListaFrecuencias :: Eq a => [a] -> [(a, Int)]
+auxListaFrecuencias xs = ordenar (generaListaFrecuencias (filtra xs) xs)
+  
+
+{- generaListaFrecuencias: Recibe una lista que tiene las letras que conforman una cadena de texto pero sin repeticiones y otra lista que es la cadena original con repeticones. Con ambas genera una lista de tuplas cuyo a representa a la letra y el Int a sus repeticiones en la cadena original. 
+Ejemplo:
+generaListaFrecuencias "yc\233NqApar,g\237t\241sel mundo." "No soy nada. Nunca seré nada. No puedo querer ser nada. Aparte eso, tengo en mí todos los sueños del mundo." = [('y',1),('c',1),('\233',1),('N',3),('q',1),('A',1),('p',2),('a',8),('r',5),(',',1),('g',1),('\237',1),('t',3),('\241',1),('s',8),('e',11),('l',2),(' ',20),('m',2),('u',5),('n',7),('d',7),
+-}
+generaListaFrecuencias ::  Eq a => [a] -> [a] -> [(a, Int)]
+generaListaFrecuencias [] ys = []
+generaListaFrecuencias (x:xs) (y:ys) = (x, (contar x (y:ys))):(generaListaFrecuencias xs (y:ys))
 
 
 {- contar: Recbe un carácter y una cadena de texto y cuenta las veces que una letra se repite en una cadena de texto.

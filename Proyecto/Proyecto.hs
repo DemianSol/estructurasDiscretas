@@ -1,12 +1,13 @@
 import Aux 
 
-{- listaFrecuencias: Recibe una cadena de texto y a partir de ella genera una lista de tuplas de todas las letras que aparecen en la cadena de texto con su respectiva frecuencia de aparación. Elimina las repeticiones de la lista con filtra para obtener caracteres únicos y con auxListaFrecuencias asocia a cada carácter único con su frecuencia de aparición en la cadena. La lista se ordena de mayor a menor cantidad de repeticiones de la letra en la cadena completa mediante la función ordena.
+
+{- listaFrecuencias: Recibe una cadena de texto y a partir de ella genera una lista de tuplas de todas las letras que aparecen en la cadena de texto con su respectiva frecuencia de aparación ordenada  de mayor a menor cantidad de repeticiones.
 Ejemplo:
 listaFrecuencias "No soy nada. Nunca seré nada. No puedo querer ser nada. Aparte eso, tengo en mí todos los sueños del mundo." = [(' ',20),('e',11),('o',11),('a',8),('s',8),('n',7),('d',7),('r',5),('u',5),('.',4),('N',3),('t',3),('p',2),('l',2),('m',2),('y',1),('c',1),('\233',1),('q',1),('A',1),(',',1),('g',1),('\237',1),('\241',1)]
 -}
 listaFrecuencias :: Eq a => [a] -> [(a, Int)]
 listaFrecuencias [] = [] 
-listaFrecuencias xs = ordenar (auxListaFrecuencias (filtra xs) xs)
+listaFrecuencias xs = auxListaFrecuencias xs
 
 
 {- creaArbol: Recibe una cadena de texto que transforma para ordenar sus caracteres por su frecuencia de aparición con listaFrecuencias. A partir de ello construye un arbol binario de Huffman mediante auxCreaArbol cuyas ramas derechas son hojas que contienen letras mientras que de las izquierdas siempre se derivan dos ramas. Entre menos repeticiones tenga una letra, mayor será el nivel del árbol en el que se colocará.
