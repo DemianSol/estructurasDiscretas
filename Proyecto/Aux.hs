@@ -1,4 +1,4 @@
-module Aux where
+module Aux (HuffmanTree, auxListaFrecuencias, auxCreaArbol, auxCodificacion, traductor) where
 
 data HuffmanTree a = Vacio | Hoja a | Nodo (HuffmanTree a) (HuffmanTree a) deriving (Eq, Ord, Show)  
 

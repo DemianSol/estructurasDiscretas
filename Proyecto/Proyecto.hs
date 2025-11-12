@@ -15,7 +15,7 @@ Ejemplo:
 creaArbol "No soy nada. Nunca seré nada. No puedo querer ser nada. Aparte eso, tengo en mí todos los sueños del mundo." = Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo Vacio Vacio) (Hoja '\241')) (Hoja '\237')) (Hoja 'g')) (Hoja ',')) (Hoja 'A')) (Hoja 'q')) (Hoja '\233')) (Hoja 'c')) (Hoja 'y')) (Hoja 'm')) (Hoja 'l')) (Hoja 'p')) (Hoja 't')) (Hoja 'N')) (Hoja '.')) (Hoja 'u')) (Hoja 'r')) (Hoja 'd')) (Hoja 'n')) (Hoja 's')) (Hoja 'a')) (Hoja 'o')) (Hoja 'e')) (Hoja ' ')
 -}
 creaArbol :: Eq a => [a]-> HuffmanTree a
-creaArbol [] = Vacio
+creaArbol [] = error "No se recibió ninguna lista de símbolos"
 creaArbol (x:xs) = auxCreaArbol (listaFrecuencias (x:xs))
 
 
@@ -33,6 +33,5 @@ Ejemplo:
 decodificacion (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo (Nodo Vacio Vacio) (Hoja '\241')) (Hoja '\237')) (Hoja 'g')) (Hoja ',')) (Hoja 'A')) (Hoja 'q')) (Hoja '\233')) (Hoja 'c')) (Hoja 'y')) (Hoja 'm')) (Hoja 'l')) (Hoja 'p')) (Hoja 't')) (Hoja 'N')) (Hoja '.')) (Hoja 'u')) (Hoja 'r')) (Hoja 'd')) (Hoja 'n')) (Hoja 's')) (Hoja 'a')) (Hoja 'o')) (Hoja 'e')) (Hoja ' ')) "000000000010011000010010000000000000001100000100010000001000100000000011000000000010000000010000010000000000000000100011000010100000001000000000000000001100000100010000001000100000000011000000000010011000000000000100000000101000000100110000000000000000001000000001010000000101000000011000010100000001100000100010000001000100000000011000000000000000000010000000000001000100000001000000000001011010000100100000000000000000000110000000000010100000100000000000000000000010011010000011000000000000001000000000000000000000011000000000001001000000100100001100000000000001001000011000010000000010100000000000000000000000100100001100000010100000000000001100000000000000100000000100000100000010010000000001" = "No soy nada. Nunca ser\233 nada. No puedo querer ser nada. Aparte eso, tengo en m\237 todos los sue\241os del mundo."
 -}
 decodificacion :: Eq a => HuffmanTree a-> [Char] -> [a]
-decodificacion Vacio xs = []
 decodificacion _ [] = []
 decodificacion arbol xs = traductor arbol arbol xs
